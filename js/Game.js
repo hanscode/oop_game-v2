@@ -8,9 +8,9 @@ class Game {
         this.phrases = [
             new Phrase('Be more with less'),
             new Phrase('Less is more'),
-            new Phrase('Happiness depends upon ourselves'),
-            new Phrase('Every moment is a fresh beginning'),
-            new Phrase('A queen is not afraid to fail')
+            new Phrase('Be curious'),
+            new Phrase('Code is Poetry'),
+            new Phrase('Knowledge is Power')
         ];
         this.activePhrase = null;
     }
@@ -20,12 +20,12 @@ class Game {
     * @return {Object} Phrase object chosen to be used.
     */
     getRandomPhrase() {
-        const array = this.phrases;
-        // Variable that uses `Math.floor`, `Math.random` and the length of the array of phrases to generate a random number
-        const randomNumber = Math.floor(Math.random() * array.length);
+        const phrasesArray = this.phrases;
+        // Variable that uses `Math.floor`, `Math.random` and the length of the phrases array to generate a random number
+        const randomNumber = Math.floor(Math.random() * phrasesArray.length);
 
         // Variable that gets the phrase object
-        let randomPhrase = array[randomNumber];
+        let randomPhrase = phrasesArray[randomNumber];
 
         // `return` the random phtase variable
         return randomPhrase;
@@ -48,7 +48,7 @@ class Game {
     */
     checkForWin() {
         const hiddenLetters = document.querySelectorAll('.hide');
-        if (hiddenLetters === 0) {
+        if (hiddenLetters.length === 0) {
             return true;
         } else {
             return false;
@@ -61,9 +61,9 @@ class Game {
     * Checks if player has remaining lives and ends game if player is out
     */
     removeLife() {
+        const liveHeart = document.querySelectorAll('.tries');
+        liveHeart[this.missed].firstChild.src = 'images/lostHeart.png';
         this.missed++;
-        const liveHeart = document.querySelector('.tries');
-        liveHeart.firstChild.src = 'images/lostHeart.png';
         if (this.missed === 5) {
             this.gameOver();
         }
@@ -82,7 +82,7 @@ class Game {
             gameOutcome.textContent = 'Great Job!';
         } else {
             screenOverlay.className = 'lose';
-            gameOverMessage.textContent = 'Sorry, better luck next time!';
+            gameOutcome.textContent = 'Sorry, better luck next time!';
         }
     };
 
@@ -92,7 +92,46 @@ class Game {
     * @param (HTMLButtonElement) button - The clicked button element
     */
     handleInteraction(button) {
+        button.disabled = true;
+        const guessedLetter = this.activePhrase.checkLetter(button.textContent);
+        if (!guessedLetter) {
+            button.classList.add('wrong');
+            this.removeLife();
+        } else {
+            button.classList.add('chosen');
+            this.activePhrase.showMatchedLetter(button.textContent);
+
+            if (this.checkForWin()) {
+                // If the player has won the game (checkForWin() is true), then call the gameOver() method.
+                this.gameOver(true);
+            }
+        }
         console.log(button);
+        console.log(this.activePhrase.checkLetter(button.textContent));
+    }
+
+    /**
+    * Reset gameboard after a game is completed by clicking the "Start Game" button to load a new game.
+    */
+
+    resetGame() {
+        // Remove all `li` elements from the Phrase `ul` element.
+        document.querySelector('ul').innerHTML = '';
+
+        /* Enable all of the onscreen keyboard buttons and update each to use the `key` CSS 
+        class, and not use the `chosen` or `wrong` CSS classes.*/
+        const keys = document.querySelectorAll('.key');
+        const hearts = document.querySelectorAll('.tries');
+
+        keys.forEach(key => {
+            key.disabled = false;
+            key.classList.remove('chosen', 'wrong');
+        });
+
+        hearts.forEach(heart => {
+            heart.firstChild.src = 'images/liveHeart.png';
+        });
+        console.log(this.missed);
     }
 
 } 

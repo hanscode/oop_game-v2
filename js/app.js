@@ -3,8 +3,7 @@
  * app.js */
 
 // STEP 2
-const phrase = new Phrase();
-
+// const phrase = new Phrase();
 // const game = new Game();
 
 // STEP 3
@@ -42,7 +41,16 @@ const phrase = new Phrase();
 let game;
 document.getElementById('btn__reset').addEventListener("click", () => {
       game = new Game();
+      game.resetGame();
       game.startGame();
+  });
+
+const keyboard = document.getElementById('qwerty');
+
+  keyboard.addEventListener("click", (e) => {
+    if (e.target.tagName == "BUTTON") {
+        game.handleInteraction(e.target);
+      }
   });
 
 

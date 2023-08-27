@@ -4,7 +4,8 @@
 
 class Phrase {
     constructor(phrase) {
-        this.phrase = phrase;
+        this.lower = phrase.toLowerCase();
+        this.phrase = this.lower;
     }
 
     /**
@@ -14,7 +15,7 @@ class Phrase {
     addPhraseToDisplay() {
 
         const ul = document.querySelector('ul');
-        const placeholder = this.phrase.toLowerCase();
+        const placeholder = this.phrase;
         const lettersPlaceholders = placeholder.split('');
 
         lettersPlaceholders.forEach(letter => {
