@@ -106,8 +106,6 @@ class Game {
                 this.gameOver(true);
             }
         }
-        console.log(button);
-        console.log(this.activePhrase.checkLetter(button.textContent));
     }
 
     /**
@@ -131,7 +129,6 @@ class Game {
         hearts.forEach(heart => {
             heart.firstChild.src = 'images/liveHeart.png';
         });
-        console.log(this.missed);
     }
 
 } 

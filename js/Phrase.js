@@ -43,7 +43,7 @@ class Phrase {
     * Displays passed letter on screen after a match is found
     * @param (string) letter - Letter to display
     */
-    showMatchedLetter(letter) { 
+    showMatchedLetter(letter) {
         const lettersElements = document.querySelectorAll('.letter');
         const matchedLetter = this.checkLetter(letter);
         if (matchedLetter) {

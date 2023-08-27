@@ -11,6 +11,7 @@ conf/*
 nginx.conf
 robots.txt
 cloner_error_log
+steps.js
 
 # ignore log files and databases
 *.log
