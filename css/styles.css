@@ -11,6 +11,7 @@
   --color-neutral-light: #D2D2D2;
   --color-keys: #37474F;
   --color-keys-light: #E5E5E5;
+  --color-keys-white: #FFFFFF;
   --font-size-large: 60px;
   --font-size-medium: 20px;
   --transition: all .2s ease-in-out;
@@ -28,6 +29,7 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  background-color: #f5f5f5;
 }
 
 li, ol, ul {
@@ -52,7 +54,8 @@ button {
   padding: .5rem 1rem;
   color: var(--color-keys);
   font-size: var(--font-size-medium);
-  background-color: var(--color-keys-light);
+  background-color: var(--color-keys-white);
+  box-shadow: 0px 1px 0px 2px #DDD;
   border-radius: 5px;
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
@@ -60,9 +63,18 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  box-shadow: 0px 0px 0px 1px #aaa;
+}
+
 #btn__reset {
 	width: 200px;
 	margin: 0 auto;
+  box-shadow: none;
+  transition: 350ms all;
+}
+#btn__reset:hover {
+  transform: scale(1.1);
 }
 
 .main-container {
@@ -89,6 +101,11 @@ button {
   color: #3a3f58;
 }
 
+/* Hearts */
+
+.tries img {
+  width: 37px;
+}
 
 /* Phrase */
 
@@ -141,6 +158,13 @@ button {
   background: #f7a964;
   color: #FFFFFF;
 }
+.wrong,
+.chosen,
+.wrong:hover,
+.chosen:hover {
+  box-shadow: none;
+  cursor: not-allowed;
+}
 
 .btn__reset {
   padding: 16px;
@@ -172,7 +196,7 @@ button {
   bottom: 0;
   left: 0;
   right: 0;
-  border-radius: 5px;
+  border-radius: 0;
 }
 
 .title {
@@ -180,7 +204,7 @@ button {
 }
 
 .start {
-  background-color: #3a3f58;
+  background-color: #576366;
 }
 
 .start a {
